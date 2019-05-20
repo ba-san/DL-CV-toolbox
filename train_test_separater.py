@@ -1,6 +1,7 @@
 import os
 import random
 import shutil
+import pandas as pd
 
 random.seed(32)
 
@@ -8,6 +9,7 @@ random.seed(32)
 source = "trial"
 PWD = os.getcwd()
 root = os.path.join(PWD, source)
+csvpath = os.path.join(root, source + ".csv")
 
 os.rename(root, os.path.join(PWD, source + "_ori"))
 os.makedirs(root)
@@ -18,6 +20,9 @@ os.makedirs(testf)
 shutil.copytree(os.path.join(PWD, source + "_ori"), trainf)
 files = os.listdir(trainf)
 
+infocsv = pd.DataFrame(columns=['class', 'total', 'train', 'test'])
+infocsv.to_csv(csvpath)
+
 for category in files:
 	os.makedirs(os.path.join(testf, category))
 	images = os.listdir(os.path.join(trainf, category))
@@ -26,9 +31,16 @@ for category in files:
 	test_num = int(len(images)*0.2)
 	print('{}: total:{} train:{} test:{}'.format(category, total_num, train_num, test_num))
 	
+	df = pd.read_csv(csvpath, index_col=0)
+	series = pd.Series([category, total_num, train_num, test_num], index=df.columns)
+	df = df.append(series, ignore_index=True)
+	df.to_csv(csvpath)
+	
 	random_list = [random.randint(0, total_num-1) for i in range(test_num)]
 
 	for i in range(len(images)):
 		if i in random_list:
 			shutil.move(os.path.join(trainf, category + "/" + images[i]), os.path.join(testf, category))
+			
+
 		
