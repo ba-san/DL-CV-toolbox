@@ -5,12 +5,12 @@ useful tools for Deep Learning &amp; Computer Vision projects
 
 **image_reisize** - create new image folder inside new "resize" directory, having resized images.  
 
-**path_changer** - change path inside csv to fit your env.  
+**path_changer** - change path inside csv to fit your environment.  
 
-**train_test_separater** - from folder which has imgs for each class, create dataset which has 20% test imgs and 80% train imgs randomly selected from original folder.  
+**train_test_separater** - from folder which has imgs for each class, create dataset which has 20% test imgs and 80% train imgs, which is randomly selected from original folder.  
 
 **unite_img2dataset** - this is designed to use after train_test_separater.py. it will collect dataset which has designated suffix and unite them to make one big dataset.  
 
 **video2img** - from a video, it will create folder having every frame img.  
 
-**write_gspread** - it will write each DL epoch result on google spreadsheet.  
+**write_gspread** - it will write final DL epoch result on google spreadsheet.  
