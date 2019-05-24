@@ -33,4 +33,4 @@ If you wanna make dataset for object-counting, you can refer to this repository:
 **write_gspread** -- you can check current learning status even on your smartphone!  
 
 ### Others
-**path_changer** -- Well, I don't know, I hope this script meets your specific needs if any.  
+**path_changer** -- I don't know, hope this meets your specific needs if any.  
