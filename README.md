@@ -1,4 +1,4 @@
-# DL-CV-tools
+# DL-CV-toolbox
 useful tools for Deep Learning &amp; Computer Vision projects
 
 **draw_learning_graph** - If you import this file when training, it will show you accuracy&loss graph dynamically.  
