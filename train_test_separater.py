@@ -10,7 +10,7 @@ def remove_glob(pathname, recursive=True):
         if os.path.isfile(p):
             os.remove(p)            
             
-random.seed(32)
+random.seed(42)
 
 #source = "name_of_folder"
 max_num = 54
