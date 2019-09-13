@@ -114,36 +114,6 @@ def draw_graph(epoch_all, epoch_now, train_acc, train_loss, test_acc, test_loss,
 	fig1.savefig(save_place + 'Training and test accuracy; '+ training_name)
 	fig2.savefig(save_place + 'Training and test loss; ' + training_name)
 
-def yyplot(y_obs, y_pred, binary_name, save_place=None):
-    yvalues = np.concatenate([y_obs.flatten(), y_pred.flatten()])
-    ymin, ymax, yrange = np.amin(yvalues), np.amax(yvalues), np.ptp(yvalues)
-    fig = plt.figure(figsize=(8, 8))
-    plt.scatter(y_obs, y_pred, color="gold")
-    plt.plot([ymin - yrange * 0.01, ymax + yrange * 0.01], [ymin - yrange * 0.01, ymax + yrange * 0.01], color="navy")
-    plt.xlim(ymin - yrange * 0.01, ymax + yrange * 0.01)
-    plt.ylim(ymin - yrange * 0.01, ymax + yrange * 0.01)
-    plt.xlabel('y_observed', fontsize=24)
-    plt.ylabel('y_predicted', fontsize=24)
-    plt.xticks( np.arange(0.0, 10.0, 1.0) )
-    plt.yticks( np.arange(0.0, 10.0, 1.0) )
-    plt.grid(b=True)
-    if binary_name == True:
-        plt.title('Train;Observed-Predicted Plot', fontsize=24)
-    else:
-	    plt.title('Test;Observed-Predicted Plot', fontsize=24)
-    plt.tick_params(labelsize=16)
-
-    if binary_name == True:
-        fig.savefig('Train;Observed-Predicted-Plot.png')
-        fig.savefig(save_place + 'Train;Observed-Predicted-Plot.png')
-    else:
-        fig.savefig('Test;Observed-Predicted-Plot.png')
-        fig.savefig(save_place + 'Test;Observed-Predicted-Plot.png')
-
-    plt.close(fig)
-
-    return fig
-
 
 # https://funatsu-lab.github.io/open-course-ware/basic-theory/accuracy-index/#how-to-check-rmse-mae-yyplot		
 # http://www.yamamo10.jp/yamamoto/comp/Python/library/Matplotlib/scatter/index.php
@@ -292,7 +262,6 @@ if __name__ == '__main__': #this is for draw_graph debug
 	for i in range(5):
 		#draw_graph(epoch, i, train_acc4debug[i], train_loss4debug[i], test_acc4debug[i], test_loss4debug[i], "debug")
 		pass
-
 
 	pixels=[0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
 	ppl_in_frame(pixels, 20, 25, 5, 'test', save_place=None, caltype="ave")
