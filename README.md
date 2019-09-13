@@ -1,9 +1,10 @@
 # DL-CV-toolbox
 useful tools for Deep Learning &amp; Computer Vision projects
 
-**draw_learning_graph** - If you import this file when training, it will show you accuracy&loss graph dynamically.  
+**draw_graphs** - If you import this file when training, it will show you accuracy&loss graph dynamically.
+You can also make yyplot and confusion matrix.  
 
-**image_resize** - create new image folder inside new "resize" directory, having resized images.  
+**image_resize_LANCZOS** - create new image folder inside new "resize" directory, having resized images.  
 
 **path_changer** - change path inside csv to fit your environment.  
 
@@ -24,12 +25,12 @@ useful tools for Deep Learning &amp; Computer Vision projects
 ↓  
 **train_test_separater** -- If you have created classes and sorted imgs above dataset accordingly, this script will make train&test folder automatically.  
 ↓  
-**image_resize** -- If you wanna change image size, you can use this b4 training.  
+**image_resize_LANCZOS** -- If you wanna change image size, you can use this b4 training.  
 
 If you wanna make dataset for object-counting, you can refer to this repository: [Count-Annotator2](https://github.com/ba-san/Count-Annotator2).
 
 ### Deep Learning
-**draw_learning_graph** -- you can check accuracy&loss in real time.  
+**draw_graphs** -- you can check accuracy&loss in real time.  
 **write_gspread** -- you can check current learning status even on your smartphone!  
 
 ### Others
