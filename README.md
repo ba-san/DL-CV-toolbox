@@ -4,7 +4,7 @@ useful tools for Deep Learning &amp; Computer Vision projects
 **draw_graphs** - If you import this file when training, it will show you accuracy&loss graph dynamically.
 You can also make yyplot and confusion matrix.  
 
-**extractor** - Extract an arbitary ratio images from assigned image folder.   
+**extractor** - Extract an arbitary ratio images from assigned image folder randomly.   
 
 **image_resize_LANCZOS** - create new image folder inside new "resize" directory, having resized images.  
 
