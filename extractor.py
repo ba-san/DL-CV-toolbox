@@ -3,7 +3,7 @@ import random
 import shutil
 import pandas as pd
 
-random.seed(32)
+random.seed(42)
 
 #source = "name_of_folder"
 source = "train"
