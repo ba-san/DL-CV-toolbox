@@ -75,7 +75,7 @@ def shiftedColorMap(cmap, start=0, midpoint=0.5, stop=1.0, name='shiftedcmap'):
     return newcmap
     
 
-def draw_graph(epoch_all, epoch_now, train_acc, train_loss, test_acc, test_loss, training_name, save_place=None):
+def draw_graph(epoch_all, epoch_now, train_acc, train_loss, test_acc, test_loss, training_name, save_place='./'):
 	global whether_first, fig1, fig2
 	train_accs.append(train_acc)
 	train_losses.append(train_loss)
