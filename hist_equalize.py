@@ -24,7 +24,7 @@ outer_circle = 10
 rectangle_thickness = 2
 circle_thickness = 2
 grid_thickness = 2
-hist_eq = True
+hist_eq = False
 
 ## https://note.nkmk.me/python-opencv-hconcat-vconcat-np-tile/
 def hconcat_resize_min(im_list, interpolation=cv2.INTER_CUBIC):
