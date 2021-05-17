@@ -104,7 +104,7 @@ def draw_graph(epoch_all, epoch_now, train_acc, train_loss, test_acc, test_loss,
 	plt.tick_params(labelsize=15)
 	plt.legend(fontsize=15)
 	
-	plt.pause(0.1)
+	#plt.pause(0.1) # to show updating process
 	
 	whether_first = 0
 	
@@ -119,7 +119,7 @@ def draw_graph(epoch_all, epoch_now, train_acc, train_loss, test_acc, test_loss,
 # http://www.yamamo10.jp/yamamoto/comp/Python/library/Matplotlib/scatter/index.php
 from scipy.stats import gaussian_kde
 
-def yyplot_density(y_obs, y_pred, binary_name, save_place=None): #y_obs and y_pred must be numpy array
+def yyplot_density(y_obs, y_pred, binary_name, save_place='./'): #y_obs and y_pred must be numpy array
     xy = np.vstack([y_obs, y_pred])
     
     # if there's too many points, this will limit it.
@@ -140,13 +140,13 @@ def yyplot_density(y_obs, y_pred, binary_name, save_place=None): #y_obs and y_pr
     plt.ylim(ymin - yrange * 0.01, ymax + yrange * 0.01)
     plt.xlabel('y_observed', fontsize=24)
     plt.ylabel('y_predicted', fontsize=24)
-    plt.xticks( np.arange(0.0, 10.0, 1.0) )
-    plt.yticks( np.arange(0.0, 10.0, 1.0) )
+    plt.xticks( np.arange(min(np.max(y_obs),np.max(y_pred)), max(np.max(y_obs),np.max(y_pred)), 1.0) )
+    plt.yticks( np.arange(min(np.max(y_obs),np.max(y_pred)), max(np.max(y_obs),np.max(y_pred)), 1.0) )
     plt.grid(b=True)
     if binary_name == True:
         plt.title('Train;Observed-Predicted Plot', fontsize=24)
     else:
-	    plt.title('Test;Observed-Predicted Plot', fontsize=24)
+        plt.title('Test;Observed-Predicted Plot', fontsize=24)
     plt.tick_params(labelsize=16)
 
     if binary_name == True:
@@ -159,9 +159,9 @@ def yyplot_density(y_obs, y_pred, binary_name, save_place=None): #y_obs and y_pr
     plt.close(fig)
     
     
-# https;//scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py   
+# https://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py   
 def plot_confusion_matrix(y_true, y_pred, classes, save_caption,
-                          save_place=None,
+                          save_place='./',
                           normalize=False,
                           cmap=plt.cm.Blues
                           ):
@@ -184,12 +184,12 @@ def plot_confusion_matrix(y_true, y_pred, classes, save_caption,
     mse = mean_squared_error(y_true, y_pred)
     
     if normalize:    
-        title = 'Normalized:accuracy={:.3f},1psn={:.3f},2ppl={:.3f},MSE={:.3f}'.format(accuracy, accuracy_1err_ok, accuracy_2err_ok, mse)
+        title = 'Normalized:accuracy={:.3f},+-1={:.3f},+-2={:.3f},MSE={:.3f}'.format(accuracy, accuracy_1err_ok, accuracy_2err_ok, mse)
     else:
-        title = 'accuracy={:.3f},1psn={:.3f},2ppl={:.3f},MSE={:.3f}'.format(accuracy, accuracy_1err_ok, accuracy_2err_ok, mse)
+        title = 'accuracy={:.3f},+-1={:.3f},+-2={:.3f},MSE={:.3f}'.format(accuracy, accuracy_1err_ok, accuracy_2err_ok, mse)
 
     fig_mx, ax = plt.subplots()
-    im = ax.imshow(cm, interpolation='nearest', cmap=cmap, vmax=900)
+    im = ax.imshow(cm, interpolation='nearest', cmap=cmap, vmax=10) # change vmax
     ax.figure.colorbar(im, ax=ax)
     # We want to show all ticks...
     ax.set(xticks=np.arange(cm.shape[1]),
@@ -225,8 +225,8 @@ def plot_confusion_matrix(y_true, y_pred, classes, save_caption,
         cnt += 1
      
     result4 = "accuracy: {}\n".format(accuracy)
-    result5 = "accuracy (accepting one person error): {}\n".format(accuracy_1err_ok)
-    result6 = "accuracy (accepting two people error): {}\n".format(accuracy_2err_ok)
+    result5 = "accuracy (accepting +-1 error): {}\n".format(accuracy_1err_ok)
+    result6 = "accuracy (accepting +-2 error): {}\n".format(accuracy_2err_ok)
     result7 = "MAE: {}\n".format(mean_absolute_error(y_true, y_pred))
     result8 = "MSE: {}\n".format(mse)
     result9 = "RMSE: {}\n".format(np.sqrt(mean_squared_error(y_true, y_pred)))
@@ -252,6 +252,8 @@ def plot_confusion_matrix(y_true, y_pred, classes, save_caption,
 
 if __name__ == '__main__': #this is for draw_graph debug
 
+	yyplot_density(np.array([0,-1,2,0,1,2,0,3,2]), np.array([-1,1,0,2,2,1,1,3,0]), "trial") #y_obs and y_pred must be numpy array
+
 	epoch = 5
 	train_acc4debug = [0.1, 0.2, 0.5, 0.6, 0.9]
 	train_loss4debug = [5, 4, 3, 3, 1]
@@ -260,8 +262,11 @@ if __name__ == '__main__': #this is for draw_graph debug
 
 
 	for i in range(5):
-		#draw_graph(epoch, i, train_acc4debug[i], train_loss4debug[i], test_acc4debug[i], test_loss4debug[i], "debug")
+		draw_graph(epoch, i, train_acc4debug[i], train_loss4debug[i], test_acc4debug[i], test_loss4debug[i], "debug") 
+		# note: you just need to give value for acc&loss, not list
 		pass
 
-	pixels=[0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9]
-	ppl_in_frame(pixels, 20, 25, 5, 'test', save_place=None, caltype="ave")
+
+	plot_confusion_matrix([0,1,2,0,1,2,0,1,2], [2,1,0,2,2,1,1,0,0], ["blue","red","green"], "trial", save_place='./', normalize=False, cmap=plt.cm.Blues)
+
+
